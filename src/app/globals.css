@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/*
+  VOLUME — sistema visual monocromo.
+  Sin color de acento: la calidez la aportan las fotografías.
+*/
+@theme {
+  --color-ink: #0e0e0e;
+  --color-paper: #ffffff;
+  --color-bone: #f6f4f1;
+  --color-muted: #6f6a64;
+  --color-line: #e5e1db;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* Foco visible y consistente para navegación por teclado. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Etiqueta superior en mayúsculas con tracking amplio. */
+  .eyebrow {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.6875rem;
+  }
+
+  /* Titulares de trazo ligero: hero y cierres. */
+  .display {
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.06;
+  }
+
+  /* Titulares de sección: medium — un escalón por encima del cuerpo (400),
+     suficiente para marcar jerarquía sin engrosar el trazo. */
+  .heading {
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
