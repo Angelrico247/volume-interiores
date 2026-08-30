@@ -54,9 +54,9 @@ export default async function ProyectoPage({
   ];
 
   return (
-    <div className="bg-ink text-paper">
-      {/* Portada */}
-      <section className="relative isolate">
+    <>
+      {/* Portada: única banda oscura, como el PageHero del resto de páginas. */}
+      <section className="relative isolate text-paper">
         <div className="relative h-[62vh] min-h-[420px] w-full md:h-[78vh]">
           <Image
             src={imageUrl(project.cover, 1800, 1200)}
@@ -67,28 +67,28 @@ export default async function ProyectoPage({
             className="object-cover"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/60"
+            className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/35 to-ink/50"
             aria-hidden="true"
           />
         </div>
 
         <Container className="absolute inset-x-0 bottom-0 pb-12 md:pb-16">
-          <span className="eyebrow text-paper/60">{project.category}</span>
+          <span className="eyebrow text-paper/70">{project.category}</span>
           <h1 className="display mt-4 text-4xl md:text-6xl">{project.name}</h1>
-          <p className="mt-3 text-base text-paper/65 md:text-lg">
+          <p className="mt-3 text-base text-paper/75 md:text-lg">
             {project.subtitle}
           </p>
         </Container>
       </section>
 
       {/* Ficha técnica */}
-      <section className="border-y border-paper/15">
+      <section className="border-b border-line bg-paper">
         <Container>
           <dl className="grid grid-cols-2 gap-y-8 py-10 md:grid-cols-4 md:py-12">
             {ficha.map((item) => (
               <div key={item.label} className="flex flex-col gap-2">
-                <dt className="eyebrow text-paper/55">{item.label}</dt>
-                <dd className="text-base text-paper md:text-lg">{item.value}</dd>
+                <dt className="eyebrow text-muted">{item.label}</dt>
+                <dd className="text-base text-ink md:text-lg">{item.value}</dd>
               </div>
             ))}
           </dl>
@@ -99,7 +99,7 @@ export default async function ProyectoPage({
       <NumberedSection number="01" label="Objetivo" body={project.goal} />
 
       {/* 02 Galería */}
-      <section className="py-16 md:py-20">
+      <section className="bg-bone py-20 md:py-28">
         <Container>
           <SectionMarker number="02" label="Galería" />
 
@@ -117,7 +117,7 @@ export default async function ProyectoPage({
               <GalleryImage
                 photo={project.gallery[1]}
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="aspect-[3/4] md:h-full md:aspect-auto"
+                className="aspect-[3/4] md:aspect-auto md:h-full"
                 width={700}
                 height={933}
               />
@@ -149,12 +149,14 @@ export default async function ProyectoPage({
 
       {/* Proyectos similares */}
       {similares.length > 0 ? (
-        <section className="border-t border-paper/15 py-16 md:py-24">
+        <section className="bg-bone py-20 md:py-28">
           <Container>
             <SectionMarker label="Proyectos similares" />
+            {/* Rejilla de altura pareja: todas las portadas en 4/3 para que
+                los títulos queden alineados. */}
             <div className="mt-10 grid gap-8 sm:grid-cols-2 md:mt-12 lg:grid-cols-3">
               {similares.map((p) => (
-                <ProjectCard key={p.slug} project={p} />
+                <ProjectCard key={p.slug} project={p} ratio="4/3" />
               ))}
             </div>
           </Container>
@@ -162,14 +164,16 @@ export default async function ProyectoPage({
       ) : null}
 
       {/* Cierre */}
-      <section className="border-t border-paper/15 py-20 md:py-28">
+      <section className="border-t border-line bg-paper py-20 md:py-28">
         <Container className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="eyebrow text-paper/55">Siguiente proyecto</span>
-            <p className="display mt-3 text-3xl md:text-5xl">{siguiente.name}</p>
+            <span className="eyebrow text-muted">Siguiente proyecto</span>
+            <p className="display mt-3 text-3xl text-ink md:text-5xl">
+              {siguiente.name}
+            </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button href={`/proyectos/${siguiente.slug}`} variant="light">
+            <Button href={`/proyectos/${siguiente.slug}`} variant="dark">
               Ver proyecto
             </Button>
             <Button href="/proyectos" variant="outline">
@@ -178,7 +182,7 @@ export default async function ProyectoPage({
           </div>
         </Container>
       </section>
-    </div>
+    </>
   );
 }
 
@@ -186,11 +190,9 @@ function SectionMarker({ number, label }: { number?: string; label: string }) {
   return (
     <div className="flex items-baseline gap-5">
       {number ? (
-        <span className="display text-2xl text-paper/45 md:text-3xl">
-          {number}
-        </span>
+        <span className="heading text-3xl text-ink md:text-4xl">{number}</span>
       ) : null}
-      <span className="eyebrow text-paper/60">{label}</span>
+      <span className="eyebrow text-muted">{label}</span>
     </div>
   );
 }
@@ -205,13 +207,13 @@ function NumberedSection({
   body: string;
 }) {
   return (
-    <section className="py-16 md:py-24">
+    <section className="bg-paper py-20 md:py-28">
       <Container>
         <div className="grid gap-8 md:grid-cols-12">
           <div className="md:col-span-4">
             <SectionMarker number={number} label={label} />
           </div>
-          <p className="text-lg leading-relaxed text-paper/70 md:col-span-8 md:text-xl">
+          <p className="text-lg leading-relaxed text-muted md:col-span-8 md:text-xl">
             {body}
           </p>
         </div>
@@ -234,7 +236,7 @@ function GalleryImage({
   height: number;
 }) {
   return (
-    <div className={`relative w-full overflow-hidden bg-paper/5 ${className}`}>
+    <div className={`relative w-full overflow-hidden bg-line ${className}`}>
       <Image
         src={imageUrl(photo.id, width, height)}
         alt={photo.alt}

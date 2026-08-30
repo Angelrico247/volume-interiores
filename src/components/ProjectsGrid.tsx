@@ -25,13 +25,13 @@ export default function ProjectsGrid() {
   );
 
   return (
-    <section className="bg-ink pb-24 pt-16 md:pb-32 md:pt-20">
+    <section className="bg-paper pb-24 pt-16 md:pb-32 md:pt-20">
       <Container>
         {/* Filtros */}
         <div
           role="group"
           aria-label="Filtrar proyectos por categoría"
-          className="flex flex-wrap gap-x-8 gap-y-3 border-b border-paper/15 pb-6"
+          className="flex flex-wrap gap-x-8 gap-y-3 border-b border-line pb-6"
         >
           {categories.map((c) => {
             const activo = c === filtro;
@@ -41,10 +41,8 @@ export default function ProjectsGrid() {
                 type="button"
                 onClick={() => setFiltro(c)}
                 aria-pressed={activo}
-                className={`eyebrow transition-opacity duration-200 ${
-                  activo
-                    ? "text-paper opacity-100"
-                    : "text-paper/60 hover:opacity-90"
+                className={`eyebrow transition-colors duration-200 ${
+                  activo ? "text-ink" : "text-muted hover:text-ink"
                 }`}
               >
                 {c}
@@ -52,7 +50,7 @@ export default function ProjectsGrid() {
             );
           })}
 
-          <span className="eyebrow ml-auto text-paper/55" aria-live="polite">
+          <span className="eyebrow ml-auto text-muted" aria-live="polite">
             {visibles.length} {visibles.length === 1 ? "proyecto" : "proyectos"}
           </span>
         </div>

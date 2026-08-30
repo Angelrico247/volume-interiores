@@ -27,19 +27,12 @@ export default function SiteHeader() {
   }, [menuOpen]);
 
   const solid = scrolled || menuOpen;
-  // Proyectos es una sección oscura de punta a punta: el estado sólido del
-  // header también va oscuro, si no aparece una barra blanca sobre el negro.
-  const darkPage = pathname.startsWith("/proyectos");
-
-  const solidStyles = darkPage
-    ? "bg-ink text-paper border-b border-paper/15"
-    : "bg-paper text-ink border-b border-line";
 
   // ¿Qué hay detrás del botón? Con el header transparente, en el home cae sobre
-  // la foto del hero (clara) y en el resto sobre el PageHero oscuro. Con el
-  // header sólido, depende del tema de la página. La píldora se invierte para
-  // no desaparecer sobre su propio fondo.
-  const onDarkSurface = solid ? darkPage : pathname !== "/";
+  // la foto del hero (clara) y en el resto sobre la banda oscura del PageHero o
+  // la portada del proyecto. La píldora se invierte para no desaparecer sobre
+  // su propio fondo.
+  const onDarkSurface = !solid && pathname !== "/";
   const pillStyles = onDarkSurface
     ? "bg-paper text-ink hover:bg-paper/85"
     : "bg-ink text-paper hover:bg-ink/80";
@@ -47,7 +40,9 @@ export default function SiteHeader() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? solidStyles : "bg-transparent text-paper"
+        solid
+          ? "bg-paper text-ink border-b border-line"
+          : "bg-transparent text-paper"
       }`}
     >
       <div className="relative mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-6 md:h-20 md:px-10">
@@ -122,12 +117,8 @@ export default function SiteHeader() {
       {/* Panel de menú móvil */}
       <div
         id="mobile-menu"
-        className={`overflow-hidden transition-[max-height] duration-300 md:hidden ${
-          darkPage ? "bg-ink text-paper" : "bg-paper text-ink"
-        } ${
-          menuOpen
-            ? `max-h-[80vh] border-t ${darkPage ? "border-paper/15" : "border-line"}`
-            : "max-h-0"
+        className={`overflow-hidden bg-paper text-ink transition-[max-height] duration-300 md:hidden ${
+          menuOpen ? "max-h-[80vh] border-t border-line" : "max-h-0"
         }`}
       >
         <nav className="flex flex-col px-6 py-4" aria-label="Móvil">
@@ -136,9 +127,7 @@ export default function SiteHeader() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className={`border-b py-4 text-lg ${
-                darkPage ? "border-paper/15" : "border-line"
-              }`}
+              className="border-b border-line py-4 text-lg"
             >
               {link.label}
             </Link>
@@ -146,9 +135,7 @@ export default function SiteHeader() {
           <Link
             href="/contacto"
             onClick={() => setMenuOpen(false)}
-            className={`mt-6 rounded-full px-6 py-3 text-center text-sm font-medium ${
-              darkPage ? "bg-paper text-ink" : "bg-ink text-paper"
-            }`}
+            className="mt-6 rounded-full bg-ink px-6 py-3 text-center text-sm font-medium text-paper"
           >
             Cotiza tu proyecto
           </Link>
