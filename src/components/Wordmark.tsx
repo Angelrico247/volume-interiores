@@ -13,7 +13,20 @@
  * visible a 28 px en el header, donde un trazo proporcional caería por debajo
  * del píxel y desaparecería.
  */
-export function VolumeMark({ className = "" }: { className?: string }) {
+type MarkProps = {
+  className?: string;
+  /**
+   * Prepara el trazo para animarlo dibujándose (loader). `pathLength={1}`
+   * normaliza la longitud, así el dash no depende de la geometría real.
+   */
+  draw?: boolean;
+};
+
+export function VolumeMark({ className = "", draw = false }: MarkProps) {
+  const dash = draw
+    ? { pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1 }
+    : {};
+
   return (
     <svg
       viewBox="0 0 100 100"
@@ -30,6 +43,8 @@ export function VolumeMark({ className = "" }: { className?: string }) {
         rx="3"
         strokeWidth={1.2}
         vectorEffect="non-scaling-stroke"
+        className={draw ? "mark-draw mark-draw--frame" : undefined}
+        {...dash}
       />
       {/* Banda hueca: contorno exterior, remate superior e interior. */}
       <path
@@ -37,6 +52,8 @@ export function VolumeMark({ className = "" }: { className?: string }) {
         strokeWidth={1.8}
         strokeLinejoin="miter"
         vectorEffect="non-scaling-stroke"
+        className={draw ? "mark-draw mark-draw--v" : undefined}
+        {...dash}
       />
     </svg>
   );

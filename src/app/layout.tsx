@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { site } from "@/data/site";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import SiteLoader from "@/components/SiteLoader";
 import "./globals.css";
 
 // Poppins: única familia del sitio — display, titulares, cuerpo y etiquetas.
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink font-sans">
+        <SiteLoader />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
