@@ -14,8 +14,8 @@ export const site = {
   whatsappNumber: "5213300000000",
   instagram: "volume.estudio",
   location: "Guadalajara, Jalisco",
-  // Dominio de producción (ajústalo al conectar Vercel).
-  url: "https://volume-estudio.vercel.app",
+  // Dominio de producción (ajústalo si cambias el dominio en Vercel).
+  url: "https://volume-interiores.vercel.app",
 };
 
 export const navLinks = [
