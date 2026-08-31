@@ -152,11 +152,9 @@ export default async function ProyectoPage({
         <section className="bg-bone py-20 md:py-28">
           <Container>
             <SectionMarker label="Proyectos similares" />
-            {/* Rejilla de altura pareja: todas las portadas en 4/3 para que
-                los títulos queden alineados. */}
-            <div className="mt-10 grid gap-8 sm:grid-cols-2 md:mt-12 lg:grid-cols-3">
+            <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 md:mt-12 lg:grid-cols-3">
               {similares.map((p) => (
-                <ProjectCard key={p.slug} project={p} ratio="4/3" />
+                <ProjectCard key={p.slug} project={p} />
               ))}
             </div>
           </Container>

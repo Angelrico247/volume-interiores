@@ -2,17 +2,17 @@
 
 import { useMemo, useState } from "react";
 import Container from "@/components/Container";
+import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import { categories, projects, type Filtro } from "@/data/projects";
 
 /**
- * Botonera de filtros + masonry.
- *
- * El masonry son columnas CSS (`columns-*`), sin JS ni librerías: cada tarjeta
- * lleva `break-inside-avoid` y su propia proporción, de ahí el ritmo desigual.
- * Contrapartida asumida: el orden de lectura baja por columna, no de izquierda
- * a derecha.
+ * Desfase vertical por columna en escritorio. Todas las portadas miden lo
+ * mismo, así que el ritmo lo da el escalonado y no un alto irregular: se ve
+ * suelto pero deliberado. Mismo recurso que la retícula de servicios.
  */
+const offsets = ["", "lg:mt-10", "lg:mt-20"];
+
 export default function ProjectsGrid() {
   const [filtro, setFiltro] = useState<Filtro>("Todos");
 
@@ -55,10 +55,16 @@ export default function ProjectsGrid() {
           </span>
         </div>
 
-        {/* Masonry */}
-        <div className="mt-10 columns-1 gap-8 sm:columns-2 md:mt-14 md:gap-10 lg:columns-3">
-          {visibles.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
+        {/* Retícula escalonada */}
+        <div className="mt-10 grid grid-cols-1 items-start gap-x-8 gap-y-12 sm:grid-cols-2 md:mt-14 md:gap-x-10 lg:grid-cols-3">
+          {visibles.map((p, i) => (
+            <Reveal
+              key={p.slug}
+              delay={(i % 3) * 80}
+              className={offsets[i % 3]}
+            >
+              <ProjectCard project={p} />
+            </Reveal>
           ))}
         </div>
       </Container>

@@ -11,27 +11,21 @@ const ratioSizes: Record<CoverRatio, [number, number]> = {
 
 type ProjectCardProps = {
   project: Project;
-  /**
-   * Proporción forzada de la portada. En el masonry se omite para que cada
-   * proyecto use la suya y se genere el ritmo desigual; en rejillas de altura
-   * pareja (p. ej. "Proyectos similares") se pasa una sola para todas, si no
-   * los textos de las tarjetas quedan a distinta altura.
-   */
+  /** Proporción de la portada. Igual en todas las tarjetas de una rejilla. */
   ratio?: CoverRatio;
 };
 
-export default function ProjectCard({ project, ratio }: ProjectCardProps) {
-  const proporcion = ratio ?? project.coverRatio;
-  const [w, h] = ratioSizes[proporcion];
+export default function ProjectCard({
+  project,
+  ratio = "4/3",
+}: ProjectCardProps) {
+  const [w, h] = ratioSizes[ratio];
 
   return (
-    <Link
-      href={`/proyectos/${project.slug}`}
-      className="group mb-8 block break-inside-avoid md:mb-10"
-    >
+    <Link href={`/proyectos/${project.slug}`} className="group block">
       <div
         className="relative w-full overflow-hidden bg-bone"
-        style={{ aspectRatio: proporcion }}
+        style={{ aspectRatio: ratio }}
       >
         <Image
           src={imageUrl(project.cover, w, h)}

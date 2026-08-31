@@ -7,7 +7,7 @@ export type Categoria = "Residencial" | "Comercial" | "Exterior";
 export const categories = ["Todos", "Residencial", "Comercial", "Exterior"] as const;
 export type Filtro = (typeof categories)[number];
 
-/** Proporción de la portada: da el ritmo desigual del masonry. */
+/** Proporción de portada admitida por las tarjetas. */
 export type CoverRatio = "3/4" | "4/3" | "1/1";
 
 export type GalleryPhoto = { id: string; alt: string };
@@ -22,7 +22,6 @@ export type Project = {
   surface: string;
   cover: string;
   coverAlt: string;
-  coverRatio: CoverRatio;
   excerpt: string;
   goal: string;
   result: string;
@@ -41,7 +40,6 @@ export const projects: Project[] = [
     cover: "1604014237800-1c9102c219da",
     coverAlt:
       "Estancia abierta al jardín con muro de madera y carpintería negra",
-    coverRatio: "4/3",
     excerpt:
       "Abrimos la planta baja al jardín y unificamos la paleta con un solo tono de madera.",
     goal: "La casa estaba dividida en cuartos chicos y oscuros: sala, comedor y cocina no se hablaban entre sí, y el jardín quedaba desaprovechado detrás de un muro ciego. La familia pedía un solo espacio donde cocinar, comer y convivir sin perder de vista a los niños.",
@@ -64,7 +62,6 @@ export const projects: Project[] = [
     surface: "145 m²",
     cover: "1616594039964-ae9021a400a0",
     coverAlt: "Recámara en tonos oscuros con candil dorado y ventanal a la ciudad",
-    coverRatio: "3/4",
     excerpt:
       "Un departamento en obra gris convertido en una vivienda de tonos profundos y latón.",
     goal: "Recibimos el departamento en obra gris, con una vista privilegiada que la distribución original desperdiciaba. El cliente viaja mucho y quería llegar a un lugar que se sintiera como un hotel: oscuro, silencioso y sin nada fuera de lugar.",
@@ -87,7 +84,6 @@ export const projects: Project[] = [
     surface: "190 m²",
     cover: "1505873242700-f289a29e1e0f",
     coverAlt: "Loft industrial con muro de ladrillo, estructura negra y doble altura",
-    coverRatio: "3/4",
     excerpt:
       "Conservamos el ladrillo y la estructura a la vista; lo nuevo se distingue de lo viejo.",
     goal: "Una bodega de los años cuarenta que había que volver habitable sin borrar lo que era. El reto: meter recámaras, baños e instalaciones en una nave de doble altura sin dividirla en cajas ni tapar el ladrillo original.",
@@ -110,7 +106,6 @@ export const projects: Project[] = [
     surface: "260 m²",
     cover: "1502005229762-cf1b2da7c5d6",
     coverAlt: "Escalera escultórica de madera y acero en doble altura",
-    coverRatio: "1/1",
     excerpt:
       "La escalera dejó de ser un trámite entre pisos y se volvió el centro de la casa.",
     goal: "El penthouse ya estaba construido y bien resuelto, pero se sentía frío y sin identidad. No había obra que hacer: el encargo era de interiorismo y estilismo puro, trabajando solo con mobiliario, textiles, iluminación y arte.",
@@ -133,7 +128,6 @@ export const projects: Project[] = [
     surface: "540 m²",
     cover: "1497366754035-f200968a6e72",
     coverAlt: "Pasillo de oficinas con cancelería de acero negro y concreto pulido",
-    coverRatio: "4/3",
     excerpt:
       "Privacidad acústica sin perder la luz: cancelería de piso a techo en todo el piso.",
     goal: "Un despacho de 40 personas que se mudaba a planta libre. Necesitaban salas cerradas para llamadas y juntas, pero sin volver el piso un laberinto ni bloquear la luz de las fachadas.",
@@ -156,7 +150,6 @@ export const projects: Project[] = [
     surface: "220 m²",
     cover: "1517248135467-4c7edcad34c4",
     coverAlt: "Comedor de restaurante con celosías de madera y luz cálida",
-    coverRatio: "3/4",
     excerpt:
       "Ochenta comensales en un local angosto, con acústica que permite conversar.",
     goal: "Un local largo y angosto donde el cliente necesitaba ochenta lugares sin que se sintiera un pasillo, y donde la cocina abierta no invadiera el comedor con ruido y olor.",
@@ -179,7 +172,6 @@ export const projects: Project[] = [
     surface: "95 m²",
     cover: "1554118811-1e0d58224f24",
     coverAlt: "Interior de cafetería con vegetación, barra de madera y luz cálida",
-    coverRatio: "1/1",
     excerpt:
       "Presupuesto corto: mobiliario de fabricación local y un solo gesto fuerte de color.",
     goal: "Presupuesto apretado y un local heredado con instalaciones al día. Había que abrir en cuatro meses y lograr algo con carácter propio sin recurrir a acabados caros.",
@@ -202,7 +194,6 @@ export const projects: Project[] = [
     surface: "420 m² + 900 m² de jardín",
     cover: "1600607688969-a5bfcd646154",
     coverAlt: "Casa contemporánea de madera y volumen negro entre árboles",
-    coverRatio: "3/4",
     excerpt:
       "Un encino de sesenta años definió la planta: la casa se abrió para rodearlo.",
     goal: "El terreno tenía un encino enorme justo donde el proyecto original ponía la casa. La familia no quiso talarlo, así que había que replantear la planta completa alrededor del árbol.",
@@ -225,7 +216,6 @@ export const projects: Project[] = [
     surface: "180 m²",
     cover: "1613490493576-7fde63acd811",
     coverAlt: "Terraza con alberca, plafones de madera y cancelería oscura",
-    coverRatio: "1/1",
     excerpt:
       "Una azotea sin uso convertida en la habitación más usada de la casa.",
     goal: "Una terraza en azotea que nadie usaba: sol directo todo el día, sin sombra ni instalaciones. La familia quería poder comer ahí y usarla de noche todo el año.",
