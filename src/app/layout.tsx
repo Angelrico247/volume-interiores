@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import SiteLoader from "@/components/SiteLoader";
 import "./globals.css";
+import DemoNotice from "@/components/DemoNotice";
 
 // Poppins: única familia del sitio — display, titulares, cuerpo y etiquetas.
 const poppins = Poppins({
@@ -15,6 +16,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   metadataBase: new URL(site.url),
   title: {
     default: `${site.name} · ${site.tagline}`,
@@ -48,6 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <DemoNotice />
       </body>
     </html>
   );
